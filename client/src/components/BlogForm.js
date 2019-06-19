@@ -25,7 +25,7 @@ const BlogForm =(props) =>{
     <Form onSubmit={handleSubmit}>
       <Form.Group widths='equal'>
         <Form.Input 
-        label= 'title'
+        label= 'Title'
         placeholder = 'Title'
         name="title"
         required
@@ -33,7 +33,7 @@ const BlogForm =(props) =>{
         value={form.title}
         />
         <Form.Input 
-        label= 'body'
+        label= 'Body'
         placeholder = 'Body'
         name="body"
         required

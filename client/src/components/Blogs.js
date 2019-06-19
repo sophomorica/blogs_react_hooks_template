@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react'
 import axios from 'axios'
 import BlogForm from './BlogForm'
 import {AuthContext} from '../providers/AuthProvider'
-import { List, Header, Segment, Button } from 'semantic-ui-react'
+import { List, Header, Segment, Button, Form } from 'semantic-ui-react'
 
 const Blogs = (props) =>{
   const [blogs, setBlogs] = useState([])
@@ -14,6 +14,8 @@ const Blogs = (props) =>{
     axios.get('/api/blogs')
     .then(res=> setBlogs(res.data))
   },[])
+
+  // const addBlog = (blog) => setBlogs([...blogs, blog])
 
   const renderBlogs = () =>{
     return blogs.map(blog =>
@@ -28,13 +30,21 @@ const Blogs = (props) =>{
     return(
       <>
       <br/>
+      <div className="top_page" style={{
+        // backgroundColor: "blue",
+        display:"flex",
+        justifyContent:"space-around"
+
+      }}>
+
       <Header as = 'h1'>My Blogs</Header>
       <br/>
       <Button onClick={()=>setShowForm(!showForm)}>
         {showForm ? "Close Form" : "Show Form"}
       </Button>
+      </div>
       <br/>
-      { showForm && <BlogForm/>}
+      { showForm && <BlogForm toggleForm={setShowForm} add ={(blog)=>setBlogs([...blogs, blog])}/>}
       <List>
         { renderBlogs() }
       </List>

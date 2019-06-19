@@ -1,8 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import axios from 'axios'
 import BlogForm from './BlogForm'
-import {AuthContext} from '../providers/AuthProvider'
-import { List, Header, Segment, Button, Form } from 'semantic-ui-react'
+import { List, Header, Segment, Button, } from 'semantic-ui-react'
 
 const Blogs = (props) =>{
   const [blogs, setBlogs] = useState([])

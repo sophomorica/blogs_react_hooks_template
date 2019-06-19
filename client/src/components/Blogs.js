@@ -3,6 +3,7 @@ import axios from 'axios'
 import { List, Header, Segment, } from 'semantic-ui-react'
 
 
+
 class Blogs extends Component{
   state = { blogs: [], }
 
@@ -26,6 +27,7 @@ class Blogs extends Component{
   render(){
     return(
       <>
+      <br/>
       <Header as = 'h1'>My Blogs</Header>
       <br/>
       <List>

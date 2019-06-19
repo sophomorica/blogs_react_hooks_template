@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect} from 'react'
+import React, { useState, useEffect} from 'react'
 import axios from 'axios'
 import { List, Header, Segment, } from 'semantic-ui-react'
 
@@ -8,7 +8,7 @@ const Blogs = (props) =>{
   useEffect(()=>{
     axios.get('/api/blogs')
     .then(res=> setBlogs(res.data))
-  })
+  },[])
 
   const renderBlogs = () =>{
     return blogs.map(blog =>

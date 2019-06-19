@@ -1,19 +1,20 @@
-import React from 'react'
-import { AuthConsumer, } from "../providers/AuthProvider";
+import React, {useContext} from 'react'
+import { AuthContext, } from "../providers/AuthProvider";
 import { Menu, } from 'semantic-ui-react'
-import { Link, withRouter, } from 'react-router-dom'
+import { Link, withRouter} from 'react-router-dom'
 
-class Navbar extends React.Component {
-  
-  rightNavItems = () => {
-    const { auth: { user, handleLogout, }, location, } = this.props;
+const Navbar = ({history, location}) =>{
+
+  const {user, handleLogout} = useContext(AuthContext)
+
+   const rightNavItems = () => {
     
     if (user) {
       return (
         <Menu.Menu position='right'>
           <Menu.Item
             name='logout'
-            onClick={ () => handleLogout(this.props.history) }
+            onClick={ () => handleLogout(history) }
           />
         </Menu.Menu>
       )
@@ -38,42 +39,29 @@ class Navbar extends React.Component {
       )
     }
   }
-  
-  render() {
-    return (
-      <div>
-        <Menu pointing secondary>
-          <Link to='/'>
-            <Menu.Item
-              name='home'
-              id='home'
-              active={this.props.location.pathname === '/'}
-            />
-          </Link>
-          <Link to='/blogs'>
-            <Menu.Item
-              name='blogs'
-              id='blogs'
-              active={this.props.location.pathname === '/blogs'}
-            />
-          </Link>
-            { this.rightNavItems() }
-        </Menu>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <Menu pointing secondary>
+        <Link to='/'>
+          <Menu.Item
+            name='home'
+            id='home'
+            active={location.pathname === '/'}
+          />
+        </Link>
+        <Link to='/blogs'>
+          <Menu.Item
+            name='blogs'
+            id='blogs'
+            active={location.pathname === '/blogs'}
+          />
+        </Link>
+          { rightNavItems() }
+      </Menu>
+    </div>
+  )
+
 }
 
-export class ConnectedNavbar extends React.Component {
-  render() {
-    return (
-      <AuthConsumer> 
-        { auth => 
-          <Navbar { ...this.props } auth={auth} />
-        }
-      </AuthConsumer>
-    )
-  }
-}
 
-export default withRouter(ConnectedNavbar);
+export default withRouter(Navbar);

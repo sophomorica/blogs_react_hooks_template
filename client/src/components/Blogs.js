@@ -2,21 +2,17 @@ import React, { Component, useState, useEffect} from 'react'
 import axios from 'axios'
 import { List, Header, Segment, } from 'semantic-ui-react'
 
+const Blogs = (props) =>{
+  const [blogs, setBlogs] = useState([])
 
-
-class Blogs extends Component{
-  state = { blogs: [], }
-
-  componentDidMount(){
+  useEffect(()=>{
     axios.get('/api/blogs')
-    .then(res =>{
-      this.setState({ blogs: res.data })
-    })
-  }
-  renderBlogs =()=>{
-    const { blogs } = this.state
+    .then(res=> setBlogs(res.data))
+  })
+
+  const renderBlogs = () =>{
     return blogs.map(blog =>
-      <Segment key={ blog.id }>
+      <Segment key={blog.id}>
         <List.Header as = 'h3'>{ blog.title }</List.Header>
         <List.Description>
           { blog.body }
@@ -24,18 +20,17 @@ class Blogs extends Component{
       </Segment>
     )
   }
-  render(){
     return(
       <>
       <br/>
       <Header as = 'h1'>My Blogs</Header>
       <br/>
       <List>
-        {this.renderBlogs()}
+        { renderBlogs() }
       </List>
       </>
     )
-  }
 }
+
 
 export default Blogs

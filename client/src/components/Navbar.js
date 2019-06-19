@@ -12,10 +12,14 @@ const Navbar = ({history, location}) =>{
     if (user) {
       return (
         <Menu.Menu position='right'>
+          <Menu.Item>
+          {user.email}
+          </Menu.Item>
           <Menu.Item
             name='logout'
             onClick={ () => handleLogout(history) }
           />
+         
         </Menu.Menu>
       )
     } else {

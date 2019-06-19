@@ -1,10 +1,14 @@
 import React, { useState, useEffect} from 'react'
 import axios from 'axios'
+import BlogForm from './BlogForm'
 import {AuthContext} from '../providers/AuthProvider'
-import { List, Header, Segment, } from 'semantic-ui-react'
+import { List, Header, Segment, Button } from 'semantic-ui-react'
 
 const Blogs = (props) =>{
   const [blogs, setBlogs] = useState([])
+  // data type of state in a class component is an object
+  const [showForm, setShowForm] = useState(false)
+
 
   useEffect(()=>{
     axios.get('/api/blogs')
@@ -26,6 +30,11 @@ const Blogs = (props) =>{
       <br/>
       <Header as = 'h1'>My Blogs</Header>
       <br/>
+      <Button onClick={()=>setShowForm(!showForm)}>
+        {showForm ? "Close Form" : "Show Form"}
+      </Button>
+      <br/>
+      { showForm && <BlogForm/>}
       <List>
         { renderBlogs() }
       </List>

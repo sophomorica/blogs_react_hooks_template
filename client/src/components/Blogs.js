@@ -19,7 +19,7 @@ const Blogs = (props) =>{
 
   const renderBlogs = () =>{
     return blogs.map(blog =>
-      <Segment key={blog.id}>
+      <Segment className="eachBlog" key={blog.id}>
         <List.Header as = 'h3'>{ blog.title }</List.Header>
         <List.Description>
           { blog.body }

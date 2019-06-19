@@ -1,22 +1,24 @@
 import React, { useState} from 'react'
 import {Form, } from 'semantic-ui-react'
 import axios from 'axios'
-import { useFormInput, } from '../Hooks/useFormInput'
+import { useFormInput, } from '../hooks/useFormInput'
 
 const BlogForm =(props) =>{
-  const emptyForm = {
-    title: "",
-    body: "", 
-   }
-  const [form, setForm] = useState(emptyForm)
+  // const emptyForm = {
+  //   title: "", 
+  //   body: "", 
+  // }
+  const title = useFormInput("")
+  const body = useFormInput("")
+  // const [form, setForm] = useState(emptyForm)
 
-  const handleChange = (name) => (e)=> {
-    setForm({...form, [name]: e.target.value})
-  }
+  // const handleChange = (name) => (e)=> {
+  //   setForm({...form, [name]: e.target.value})
+  // }
 
   const handleSubmit = (e) =>{
     e.preventDefault()
-    axios.post("/api/blogs", {...form,})
+    axios.post("/api/blogs", {title: title.value, body: body.value})
     .then(res=>{
       props.add(res.data)
       props.toggleForm()
@@ -30,16 +32,14 @@ const BlogForm =(props) =>{
         placeholder = 'Title'
         name="title"
         required
-        onChange={handleChange("title")}
-        value={form.title}
+        {...title}
         />
         <Form.Input 
         label= 'Body'
         placeholder = 'Body'
         name="body"
         required
-        onChange={handleChange("body")}
-        value={form.body}
+        {...body}
         />
       </Form.Group>
       <Form.Button>

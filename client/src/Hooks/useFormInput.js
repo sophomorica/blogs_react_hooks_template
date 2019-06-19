@@ -6,7 +6,7 @@ export const useFormInput = (initialValue) =>{
 
   return {
     value, 
-    onChange: (e) => setValue(e.taget.value)
+    onChange: (e) => setValue(e.target.value)
   }
 
 }
